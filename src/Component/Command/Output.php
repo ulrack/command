@@ -6,8 +6,8 @@
 
 namespace Ulrack\Command\Component\Command;
 
+use GrizzIt\Task\Common\TaskListInterface;
 use Ulrack\Cli\Common\Io\WriterInterface;
-use Ulrack\Task\Common\TaskListInterface;
 use Ulrack\Cli\Common\Theme\ThemeInterface;
 use Ulrack\Command\Common\Command\OutputInterface;
 use Ulrack\Cli\Common\Factory\IoFactoryInterface;

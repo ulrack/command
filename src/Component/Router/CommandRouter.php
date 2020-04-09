@@ -7,6 +7,8 @@
 namespace Ulrack\Command\Component\Router;
 
 use Throwable;
+use GrizzIt\Validator\Component\Type\StringValidator;
+use GrizzIt\Validator\Component\Textual\PatternValidator;
 use Ulrack\Command\Command\HelpCommand;
 use Ulrack\Command\Command\ListCommandsCommand;
 use Ulrack\Cli\Common\Factory\IoFactoryInterface;
@@ -15,11 +17,9 @@ use Ulrack\Command\Common\Router\RouterInterface;
 use Ulrack\Command\Common\Command\OutputInterface;
 use Ulrack\Command\Common\Command\CommandInterface;
 use Ulrack\Services\Common\ServiceFactoryInterface;
-use Ulrack\Validator\Component\Type\StringValidator;
 use Ulrack\Cli\Common\Factory\ElementFactoryInterface;
 use Ulrack\Command\Exception\CommandNotFoundException;
 use Ulrack\Cli\Common\Generator\FormGeneratorInterface;
-use Ulrack\Validator\Component\Textual\PatternValidator;
 use Ulrack\Command\Exception\CommandCanNotExecuteException;
 use Ulrack\Command\Exception\MisconfiguredCommandException;
 use Ulrack\Command\Common\Dao\CommandConfigurationInterface;

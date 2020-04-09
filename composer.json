@@ -8,11 +8,11 @@
     "minimum-stability": "stable",
     "require": {
         "php": "^7.2",
+        "grizz-it/configuration": "^1.0",
+        "grizz-it/task": "^1.0",
+        "grizz-it/validator": "^1.0",
         "ulrack/cli": "^1.0",
-        "ulrack/configuration": "^1.0",
-        "ulrack/services": "^1.0",
-        "ulrack/task": "^1.0",
-        "ulrack/validator": "^1.0"
+        "ulrack/services": "^1.0"
     },
     "authors": [{
         "name": "Ulrack",

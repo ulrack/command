@@ -1,5 +1,6 @@
 <?php
 
+use GrizzIt\ObjectFactory\Factory\ObjectFactory;
 use Ulrack\Cli\Factory\IoFactory;
 use Ulrack\Cli\Factory\FormFactory;
 use Ulrack\Cli\Factory\ThemeFactory;
@@ -10,7 +11,6 @@ use Ulrack\Command\Factory\InputFactory;
 use Ulrack\Cli\Component\Theme\DefaultTheme;
 use Ulrack\Command\Component\Command\Output;
 use Ulrack\Command\Dao\CommandConfiguration;
-use Ulrack\ObjectFactory\Factory\ObjectFactory;
 use Ulrack\Command\Common\Command\InputInterface;
 use Ulrack\Command\Common\Command\OutputInterface;
 use Ulrack\Command\Component\Router\CommandRouter;

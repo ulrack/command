@@ -4,6 +4,6 @@
  * See LICENSE for license details.
  */
 
-use Ulrack\Configuration\Component\Configuration\PackageLocator;
+use GrizzIt\Configuration\Component\Configuration\PackageLocator;
 
 PackageLocator::registerLocation(__DIR__);

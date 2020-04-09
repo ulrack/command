@@ -7,9 +7,9 @@
 namespace Ulrack\Command\Tests\Component\Command;
 
 use PHPUnit\Framework\TestCase;
+use GrizzIt\Task\Common\TaskListInterface;
 use Ulrack\Command\Component\Command\Output;
 use Ulrack\Cli\Common\Io\WriterInterface;
-use Ulrack\Task\Common\TaskListInterface;
 use Ulrack\Cli\Common\Theme\ThemeInterface;
 use Ulrack\Cli\Common\Element\ElementInterface;
 use Ulrack\Cli\Common\Factory\IoFactoryInterface;

@@ -6,7 +6,7 @@
 
 namespace Ulrack\Command\Common\Command;
 
-use Ulrack\Task\Common\TaskListInterface;
+use GrizzIt\Task\Common\TaskListInterface;
 use Ulrack\Cli\Common\Generator\FormGeneratorInterface;
 
 interface OutputInterface
