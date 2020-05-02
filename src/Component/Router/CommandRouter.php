@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright (C) GrizzIT, Inc. All rights reserved.
  * See LICENSE for license details.
@@ -121,10 +122,12 @@ class CommandRouter implements RouterInterface
 
             if ($serviceKey !== '') {
                 try {
-                    foreach ($this->getMissingParameters(
-                        $input,
-                        $command
-                    ) as $key => $value) {
+                    foreach (
+                        $this->getMissingParameters(
+                            $input,
+                            $command
+                        ) as $key => $value
+                    ) {
                         $input->setParameter($key, $value);
                     }
                 } catch (MisconfiguredCommandException $exception) {
@@ -159,7 +162,7 @@ class CommandRouter implements RouterInterface
             $this->errorElementFactory->createBlock(
                 $exception->getMessage(),
                 'error-block'
-            );
+            )->render();
 
             $code = $exception->getCode();
 
@@ -210,24 +213,32 @@ class CommandRouter implements RouterInterface
         $missing = false;
         $this->formGenerator->init(
             'Missing parameters',
-            'The following parameters were required and missing. '.
+            'The following parameters were required and missing. ' .
             'Please fill them in before execution procceeds.'
         );
 
         foreach ($configuration->getParameters() as $parameter) {
-            if (isset($parameter['required'])
-            && $parameter['required']) {
-                if (!$input->hasParameter(
-                    $parameter['long'] ?? $parameter['short']
-                )) {
+            if (
+                isset($parameter['required'])
+                && $parameter['required']
+            ) {
+                if (
+                    !$input->hasParameter(
+                        $parameter['long'] ?? $parameter['short']
+                    )
+                ) {
                     $missing = true;
-                    if (isset($parameter['hidden'])
-                    && $parameter['hidden']) {
+                    if (
+                        isset($parameter['hidden'])
+                        && $parameter['hidden']
+                    ) {
                         $this->createHiddenField($parameter);
 
                         continue;
-                    } elseif (isset($parameter['options'])
-                    && is_array($parameter['options'])) {
+                    } elseif (
+                        isset($parameter['options'])
+                        && is_array($parameter['options'])
+                    ) {
                         $this->createAutocompletingField($parameter);
 
                         continue;

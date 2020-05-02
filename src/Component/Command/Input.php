@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright (C) GrizzIT, Inc. All rights reserved.
  * See LICENSE for license details.
@@ -83,13 +84,17 @@ class Input implements InputInterface
         }
 
         if ($this->commandConfiguration !== null) {
-            foreach ($this->commandConfiguration
-            ->getParameters() as $parameterInput) {
+            foreach (
+                $this->commandConfiguration
+                ->getParameters() as $parameterInput
+            ) {
                 $long = $parameterInput['long'] ?? '';
                 $short = $parameterInput['short'] ?? '';
                 if ($long === $parameter || $short === $parameter) {
-                    if (array_key_exists($long, $this->parameters)
-                    || array_key_exists($short, $this->parameters)) {
+                    if (
+                        array_key_exists($long, $this->parameters)
+                        || array_key_exists($short, $this->parameters)
+                    ) {
                         return true;
                     }
                 }
@@ -157,10 +162,14 @@ class Input implements InputInterface
 
         if ($this->commandConfiguration !== null) {
             foreach ($this->commandConfiguration->getFlags() as $configFlag) {
-                if ($configFlag['long'] === $flag
-                || $configFlag['short'] === $flag) {
-                    if (in_array($configFlag['long'], $this->flags)
-                    || in_array($configFlag['short'], $this->flags)) {
+                if (
+                    $configFlag['long'] === $flag
+                    || $configFlag['short'] === $flag
+                ) {
+                    if (
+                        in_array($configFlag['long'], $this->flags)
+                        || in_array($configFlag['short'], $this->flags)
+                    ) {
                         return true;
                     }
                 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright (C) GrizzIT, Inc. All rights reserved.
  * See LICENSE for license details.
@@ -67,7 +68,8 @@ class InputFactory implements InputFactoryInterface
 
                 // No subsequent value starting without a "-"
                 // It must be a flag
-                if (empty($arguments[0])
+                if (
+                    empty($arguments[0])
                     || substr($arguments[0], 0, 1) === '-'
                 ) {
                     $flags[] = ltrim($argument, '-');
