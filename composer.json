@@ -12,7 +12,7 @@
         "grizz-it/task": "^1.0",
         "grizz-it/validator": "^1.0",
         "ulrack/cli": "^1.0",
-        "ulrack/services": "^1.0"
+        "ulrack/services": "^2.0"
     },
     "authors": [{
         "name": "Ulrack",
