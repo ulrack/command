@@ -337,7 +337,7 @@ class Output implements OutputInterface
         if ((string) $this->outputMode !== OutputModeEnum::OUTPUT_MODE_QUIET) {
             if (
                 $verbose &&
-                (string) $this->outputMode !== OutputModeEnum::OUTPUT_MODE_VERBOSE
+                (string) $this->outputMode === OutputModeEnum::OUTPUT_MODE_VERBOSE
             ) {
                 return true;
             } elseif (!$verbose) {
