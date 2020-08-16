@@ -8,6 +8,7 @@
 namespace Ulrack\Command\Common\Command;
 
 use GrizzIt\Task\Common\TaskListInterface;
+use Ulrack\Command\Common\Command\OutputModeEnum;
 use Ulrack\Cli\Common\Generator\FormGeneratorInterface;
 
 interface OutputInterface
@@ -17,20 +18,30 @@ interface OutputInterface
      *
      * @param string $input
      * @param string $style
+     * @param bool $verbose
      *
      * @return void
      */
-    public function write(string $input, string $style = 'text'): void;
+    public function write(
+        string $input,
+        string $style = 'text',
+        bool $verbose = false
+    ): void;
 
     /**
      * Writes the output in a line to the user.
      *
      * @param string $input
      * @param string $style
+     * @param bool $verbose
      *
      * @return void
      */
-    public function writeLine(string $input, string $style = 'text'): void;
+    public function writeLine(
+        string $input,
+        string $style = 'text',
+        bool $verbose = false
+    ): void;
 
     /**
      * Writes a mutable line to the user.
@@ -38,10 +49,15 @@ interface OutputInterface
      *
      * @param string $input
      * @param string $style
+     * @param bool $verbose
      *
      * @return void
      */
-    public function overWrite(string $input, string $style = 'text'): void;
+    public function overWrite(
+        string $input,
+        string $style = 'text',
+        bool $verbose = false
+    ): void;
 
     /**
      * Retrieves the form generator.
@@ -56,13 +72,15 @@ interface OutputInterface
      * @param string $content
      * @param bool $newLine
      * @param string $styleKey
+     * @param bool $verbose
      *
      * @return void
      */
     public function outputText(
         string $content,
         bool $newLine = true,
-        string $styleKey = 'text'
+        string $styleKey = 'text',
+        bool $verbose = false
     ): void;
 
     /**
@@ -74,6 +92,7 @@ interface OutputInterface
      * @param string $style
      * @param string $boxStyle
      * @param string $keyStyle
+     * @param bool $verbose
      *
      * @return void
      */
@@ -83,7 +102,8 @@ interface OutputInterface
         string $tableCharacters = 'table-characters',
         string $style = 'table-style',
         string $boxStyle = 'table-box-style',
-        string $keyStyle = 'table-key-style'
+        string $keyStyle = 'table-key-style',
+        bool $verbose = false
     ): void;
 
     /**
@@ -91,12 +111,14 @@ interface OutputInterface
      *
      * @param array $items
      * @param string $style
+     * @param bool $verbose
      *
      * @return void
      */
     public function outputList(
         array $items,
-        string $style = 'list'
+        string $style = 'list',
+        bool $verbose = false
     ): void;
 
     /**
@@ -105,13 +127,15 @@ interface OutputInterface
      * @param array $items
      * @param string $keyStyle
      * @param string $descriptionStyle
+     * @param bool $verbose
      *
      * @return void
      */
     public function outputExplainedList(
         array $items,
         string $keyStyle = 'explained-list-key',
-        string $descriptionStyle = 'explained-list-description'
+        string $descriptionStyle = 'explained-list-description',
+        bool $verbose = false
     ): void;
 
     /**
@@ -121,6 +145,7 @@ interface OutputInterface
      * @param string $style
      * @param string $padding
      * @param string $margin
+     * @param bool $verbose
      *
      * @return void
      */
@@ -128,7 +153,8 @@ interface OutputInterface
         string $content,
         string $style = 'block',
         string $padding = 'block-padding',
-        string $margin = 'block-margin'
+        string $margin = 'block-margin',
+        bool $verbose = false
     ): void;
 
     /**
@@ -138,6 +164,7 @@ interface OutputInterface
      * @param string $progressCharacters
      * @param string $textStyle
      * @param string $progressStyle
+     * @param bool $verbose
      *
      * @return void
      */
@@ -145,6 +172,16 @@ interface OutputInterface
         TaskListInterface $taskList,
         string $progressCharacters = 'progress-characters',
         string $textStyle = 'progress-text',
-        string $progressStyle = 'progress-bar'
+        string $progressStyle = 'progress-bar',
+        bool $verbose = false
     ): void;
+
+    /**
+     * Sets the output mode.
+     *
+     * @param OutputModeEnum $outputMode
+     *
+     * @return void
+     */
+    public function setOutputMode(OutputModeEnum $outputMode): void;
 }

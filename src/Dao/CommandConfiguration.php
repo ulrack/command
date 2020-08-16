@@ -75,6 +75,16 @@ class CommandConfiguration implements CommandConfigurationInterface
                     'long' => 'no-interaction',
                     'short' => 'ni',
                     'description' => 'Prevents interaction during the execution of a command.'
+                ],
+                [
+                    'long' => 'verbose',
+                    'short' => 'v',
+                    'description' => 'Displays verbose output for a command.'
+                ],
+                [
+                    'long' => 'quiet',
+                    'short' => 'q',
+                    'description' => 'Silences all output.'
                 ]
             ]
         );

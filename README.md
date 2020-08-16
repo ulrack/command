@@ -21,7 +21,11 @@ This main object can then be supplied to the [router](src/Common/Router/RouterIn
 
 All sub-commands can be added to their respective command configuration instance.
 This can be infinitely deep.
-All command configuration instances have the `no-interaction` and `help` flag configured by default.
+All command configuration instances have the following flags configured by default:
+- `no-interaction`, disables the interactive reader.
+- `help`, displays help text for the execution of the command.
+- `verbose`, displays additional information about the execution of the command.
+- `quiet`, suppresses the output of the command.
 Sub-commands of a parent command can be executed by separating them by a space.
 
 ### [Router](src/Component/Router/CommandRouter.php)

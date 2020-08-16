@@ -8,12 +8,13 @@
 namespace Ulrack\Command\Tests\Component\Command;
 
 use PHPUnit\Framework\TestCase;
-use GrizzIt\Task\Common\TaskListInterface;
-use Ulrack\Command\Component\Command\Output;
 use Ulrack\Cli\Common\Io\WriterInterface;
+use GrizzIt\Task\Common\TaskListInterface;
 use Ulrack\Cli\Common\Theme\ThemeInterface;
+use Ulrack\Command\Component\Command\Output;
 use Ulrack\Cli\Common\Element\ElementInterface;
 use Ulrack\Cli\Common\Factory\IoFactoryInterface;
+use Ulrack\Command\Common\Command\OutputModeEnum;
 use Ulrack\Cli\Common\Factory\ElementFactoryInterface;
 use Ulrack\Cli\Common\Generator\FormGeneratorInterface;
 
@@ -24,6 +25,7 @@ class OutputTest extends TestCase
 {
     /**
      * @covers ::write
+     * @covers ::canOutput
      * @covers ::__construct
      *
      * @return void
@@ -54,6 +56,7 @@ class OutputTest extends TestCase
 
     /**
      * @covers ::writeLine
+     * @covers ::canOutput
      * @covers ::__construct
      *
      * @return void
@@ -84,6 +87,7 @@ class OutputTest extends TestCase
 
     /**
      * @covers ::overWrite
+     * @covers ::canOutput
      * @covers ::__construct
      *
      * @return void
@@ -114,6 +118,7 @@ class OutputTest extends TestCase
 
     /**
      * @covers ::getFormGenerator
+     * @covers ::canOutput
      * @covers ::__construct
      *
      * @return void
@@ -133,6 +138,7 @@ class OutputTest extends TestCase
 
     /**
      * @covers ::outputText
+     * @covers ::canOutput
      * @covers ::__construct
      *
      * @return void
@@ -165,6 +171,7 @@ class OutputTest extends TestCase
 
     /**
      * @covers ::outputTable
+     * @covers ::canOutput
      * @covers ::__construct
      *
      * @return void
@@ -200,6 +207,7 @@ class OutputTest extends TestCase
 
     /**
      * @covers ::outputList
+     * @covers ::canOutput
      * @covers ::__construct
      *
      * @return void
@@ -231,6 +239,7 @@ class OutputTest extends TestCase
 
     /**
      * @covers ::outputExplainedList
+     * @covers ::canOutput
      * @covers ::__construct
      *
      * @return void
@@ -263,6 +272,7 @@ class OutputTest extends TestCase
 
     /**
      * @covers ::outputBlock
+     * @covers ::canOutput
      * @covers ::__construct
      *
      * @return void
@@ -296,6 +306,7 @@ class OutputTest extends TestCase
 
     /**
      * @covers ::outputProgressBar
+     * @covers ::canOutput
      * @covers ::__construct
      *
      * @return void
@@ -330,5 +341,44 @@ class OutputTest extends TestCase
             $textStyle,
             $progressStyle
         );
+    }
+
+    /**
+     * @covers ::write
+     * @covers ::canOutput
+     * @covers ::setOutputMode
+     * @covers ::__construct
+     *
+     * @return void
+     */
+    public function testOutputMode(): void
+    {
+        $writer = $this->createMock(WriterInterface::class);
+        $ioFactory = $this->createMock(IoFactoryInterface::class);
+        $ioFactory->expects(static::once())
+            ->method('createStandardWriter')
+            ->willReturn($writer);
+
+        $subject = new Output(
+            $this->createMock(FormGeneratorInterface::class),
+            $ioFactory,
+            $this->createMock(ThemeInterface::class),
+            $this->createMock(ElementFactoryInterface::class)
+        );
+
+        $input = 'foo';
+
+        $writer->expects(static::exactly(3))
+            ->method('write')
+            ->with($input);
+
+        $subject->write($input);
+        $subject->write($input, 'text', true);
+        $subject->setOutputMode(OutputModeEnum::OUTPUT_MODE_QUIET());
+        $subject->write($input);
+        $subject->write($input, 'text', true);
+        $subject->setOutputMode(OutputModeEnum::OUTPUT_MODE_VERBOSE());
+        $subject->write($input);
+        $subject->write($input, 'text', true);
     }
 }

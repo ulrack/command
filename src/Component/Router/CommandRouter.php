@@ -8,19 +8,20 @@
 namespace Ulrack\Command\Component\Router;
 
 use Throwable;
-use GrizzIt\Validator\Component\Type\StringValidator;
-use GrizzIt\Validator\Component\Textual\PatternValidator;
 use Ulrack\Command\Command\HelpCommand;
 use Ulrack\Command\Command\ListCommandsCommand;
 use Ulrack\Cli\Common\Factory\IoFactoryInterface;
 use Ulrack\Command\Common\Command\InputInterface;
+use Ulrack\Command\Common\Command\OutputModeEnum;
 use Ulrack\Command\Common\Router\RouterInterface;
 use Ulrack\Command\Common\Command\OutputInterface;
 use Ulrack\Command\Common\Command\CommandInterface;
 use Ulrack\Services\Common\ServiceFactoryInterface;
+use GrizzIt\Validator\Component\Type\StringValidator;
 use Ulrack\Cli\Common\Factory\ElementFactoryInterface;
 use Ulrack\Command\Exception\CommandNotFoundException;
 use Ulrack\Cli\Common\Generator\FormGeneratorInterface;
+use GrizzIt\Validator\Component\Textual\PatternValidator;
 use Ulrack\Command\Exception\CommandCanNotExecuteException;
 use Ulrack\Command\Exception\MisconfiguredCommandException;
 use Ulrack\Command\Common\Dao\CommandConfigurationInterface;
@@ -107,6 +108,18 @@ class CommandRouter implements RouterInterface
         $command = $input->getCommand();
         $originalCommand = $command;
         try {
+            if ($input->isSetFlag('verbose')) {
+                $this->output->setOutputMode(
+                    OutputModeEnum::OUTPUT_MODE_VERBOSE()
+                );
+            }
+
+            if ($input->isSetFlag('quiet')) {
+                $this->output->setOutputMode(
+                    OutputModeEnum::OUTPUT_MODE_QUIET()
+                );
+            }
+
             $command = $this->findCommand($originalCommand);
             $input->loadConfiguration($command);
             if ($input->isSetFlag('no-interaction')) {
@@ -165,6 +178,39 @@ class CommandRouter implements RouterInterface
             )->render();
 
             $code = $exception->getCode();
+
+            $trace = $exception->getTraceAsString();
+            $i = 0;
+            $this->output->writeLine(
+                'Previouse exceptions:',
+                'text',
+                true
+            );
+
+            while ($exception = $exception->getPrevious()) {
+                $i++;
+                $this->output->writeLine(
+                    sprintf(
+                        'Previous %d: %s',
+                        $i,
+                        $exception->getMessage()
+                    ),
+                    'text',
+                    true
+                );
+            }
+
+            $this->output->writeLine(
+                '',
+                'text',
+                true
+            );
+
+            $this->output->writeLine(
+                sprintf('Trace: %s', $trace),
+                'text',
+                true
+            );
 
             return is_string($code) || !$code ? 1 : $code;
         }

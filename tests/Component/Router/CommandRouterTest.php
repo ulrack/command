@@ -97,7 +97,7 @@ class CommandRouterTest extends TestCase
             ],
             // Show help command
             [
-                new Input([], [], ['help']),
+                new Input([], [], ['help', 'verbose']),
                 $this->createMock(CommandConfigurationInterface::class),
                 0
             ],
@@ -109,7 +109,7 @@ class CommandRouterTest extends TestCase
             ],
             // Command not found in command
             [
-                new Input(['foo', 'bar']),
+                new Input(['foo', 'bar'], [], ['quiet']),
                 $fooConfig,
                 127
             ],
