@@ -173,7 +173,7 @@ class CommandRouter implements RouterInterface
             );
         } catch (Throwable $exception) {
             $this->errorElementFactory->createBlock(
-                $exception->getMessage(),
+                substr($exception->getMessage(), 0, 1000),
                 'error-block'
             )->render();
 
@@ -182,7 +182,7 @@ class CommandRouter implements RouterInterface
             $trace = $exception->getTraceAsString();
             $i = 0;
             $this->output->writeLine(
-                'Previouse exceptions:',
+                'Previous exceptions:',
                 'text',
                 true
             );
