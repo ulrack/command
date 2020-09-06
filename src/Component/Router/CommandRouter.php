@@ -108,6 +108,9 @@ class CommandRouter implements RouterInterface
         $command = $input->getCommand();
         $originalCommand = $command;
         try {
+            $command = $this->findCommand($originalCommand);
+            $input->loadConfiguration($command);
+
             if ($input->isSetFlag('verbose')) {
                 $this->output->setOutputMode(
                     OutputModeEnum::OUTPUT_MODE_VERBOSE()
@@ -120,8 +123,6 @@ class CommandRouter implements RouterInterface
                 );
             }
 
-            $command = $this->findCommand($originalCommand);
-            $input->loadConfiguration($command);
             if ($input->isSetFlag('no-interaction')) {
                 $this->ioFactory->setAllowReading(false);
             }
