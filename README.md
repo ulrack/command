@@ -1,3 +1,5 @@
+# DEPRECATION NOTICE: this package has been moved and improved at [grizz-it/command](https://github.com/grizz-it/command) and [ulrack/cli-application](https://github.com/ulrack/cli-application)
+
 [![Build Status](https://travis-ci.com/ulrack/command.svg?branch=master)](https://travis-ci.com/ulrack/command)
 
 # Ulrack Command
